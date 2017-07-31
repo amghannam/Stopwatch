@@ -91,7 +91,7 @@ public class Stopwatch {
 	}
 
 	/**
-	 * Returns the total elapsed time measured so far by the current instance, 
+	 * Returns the total elapsed time measured so far by the current instance,
 	 * in milliseconds.
 	 * 
 	 * @return the total elapsed time in milliseconds
@@ -115,5 +115,21 @@ public class Stopwatch {
 	 */
 	public boolean isRunning() {
 		return running == true;
+	}
+
+	/**
+	 * Returns a string representation of the current elapsed time, expressed in
+	 * milliseconds using two decimal places.
+	 * 
+	 * <p>
+	 * Example: 1.2345 would return a string value equal to "1.23 ms".
+	 * </p>
+	 * 
+	 * @return a string representation of the elapsed time in milliseconds
+	 */
+	@Override
+	public String toString() {
+		double rounded = Math.round(elapsed() * 100d) / 100d; 
+		return String.valueOf(rounded).concat(" ms");
 	}
 }
