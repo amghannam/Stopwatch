@@ -137,7 +137,8 @@ public class Stopwatch {
 	 * milliseconds using two decimal places.
 	 * 
 	 * <p>
-	 * Example: 1.2345 would return a string value equal to "1.23 ms".
+	 * Example: 1.2345 would return a string value equal to 
+	 * <code>"1.23 ms"</code>.
 	 * </p>
 	 * 
 	 * @return a string representation of the elapsed time in milliseconds
