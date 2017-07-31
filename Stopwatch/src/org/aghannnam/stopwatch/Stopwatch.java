@@ -94,6 +94,16 @@ public class Stopwatch {
 			running = false;
 		}
 	}
+	
+	/**
+	 * Returns the total elapsed time measured so far by the current instance,
+	 * in seconds.
+	 * 
+	 * @return the total elapsed time in seconds
+	 */
+	public double elapsedSeconds() {
+		return elapsedMillis() / MILLIS_PER_SECOND;
+	}
 
 	/**
 	 * Returns the total elapsed time measured so far by the current instance,
@@ -109,16 +119,6 @@ public class Stopwatch {
 		}
 		// Otherwise, just return the timestamp as of the last call to stop()
 		return elapsed / NANOS_PER_MILLI;
-	}
-
-	/**
-	 * Returns the total elapsed time measured so far by the current instance,
-	 * in seconds.
-	 * 
-	 * @return the total elapsed time in seconds
-	 */
-	public double elapsedSeconds() {
-		return elapsedMillis() / MILLIS_PER_SECOND;
 	}
 
 	/**
