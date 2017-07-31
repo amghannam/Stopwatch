@@ -91,8 +91,8 @@ public class Stopwatch {
 	}
 
 	/**
-	 * Returns the total elapsed time measured by the current instance, in
-	 * milliseconds.
+	 * Returns the total elapsed time measured so far by the current instance, 
+	 * in milliseconds.
 	 * 
 	 * @return the total elapsed time in milliseconds
 	 */
