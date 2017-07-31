@@ -63,7 +63,7 @@ public class Stopwatch {
 		// Calling start() on a running stopwatch is a no-op
 		if (!isRunning()) {
 			running = true;
-			start = System.nanoTime();
+			start = start <= 0 ? System.nanoTime() : System.nanoTime() - elapsed;
 		}
 	}
 
@@ -85,7 +85,7 @@ public class Stopwatch {
 	public void stop() {
 		// Calling stop() on a stopped stopwatch is a no-op
 		if (isRunning()) {
-			computeCurrentElapsed();
+			elapsed = System.nanoTime() - start;
 			running = false;
 		}
 	}
@@ -99,9 +99,10 @@ public class Stopwatch {
 	public double elapsed() {
 		// If the stopwatch is running, find and return the current timestamp
 		if (isRunning()) {
-			computeCurrentElapsed();
-			return elapsed / NANOS_PER_MILLI;
-		} // Otherwise, just return the timestamp as of the last call to stop()
+			long currentElapsed = System.nanoTime() - start;
+			return currentElapsed / NANOS_PER_MILLI;
+		}
+		// Otherwise, just return the timestamp as of the last call to stop()
 		return elapsed / NANOS_PER_MILLI;
 	}
 
@@ -114,15 +115,5 @@ public class Stopwatch {
 	 */
 	public boolean isRunning() {
 		return running == true;
-	}
-
-	/**
-	 * Updates the current total elapsed time. This helper method ensures we 
-	 * have the most up-to-date timestamp regardless of whether the stopwatch 
-	 * instance is running. 
-	 */
-	private void computeCurrentElapsed() {
-		long elapsedThisPeriod = System.nanoTime() - start;
-		elapsed += elapsedThisPeriod;
 	}
 }
