@@ -16,12 +16,17 @@ public class Stopwatch {
 	private static final double NANOS_PER_MILLI = 1000000.0;
 
 	/**
+	 * The number of milliseconds in one second.
+	 */
+	private static final double MILLIS_PER_SECOND = 1000.0;
+
+	/**
 	 * Whether or not the current instance is running.
 	 */
 	private boolean running;
 
 	/**
-	 * The total elapsed time in milliseconds.
+	 * The total elapsed time, in nanoseconds.  
 	 */
 	private long elapsed;
 
@@ -96,7 +101,7 @@ public class Stopwatch {
 	 * 
 	 * @return the total elapsed time in milliseconds
 	 */
-	public double elapsed() {
+	public double elapsedMillis() {
 		// If the stopwatch is running, find and return the current timestamp
 		if (isRunning()) {
 			long currentElapsed = System.nanoTime() - start;
@@ -104,6 +109,16 @@ public class Stopwatch {
 		}
 		// Otherwise, just return the timestamp as of the last call to stop()
 		return elapsed / NANOS_PER_MILLI;
+	}
+
+	/**
+	 * Returns the total elapsed time measured so far by the current instance,
+	 * in seconds.
+	 * 
+	 * @return the total elapsed time in seconds
+	 */
+	public double elapsedSeconds() {
+		return elapsedMillis() / MILLIS_PER_SECOND;
 	}
 
 	/**
@@ -129,7 +144,7 @@ public class Stopwatch {
 	 */
 	@Override
 	public String toString() {
-		double rounded = Math.round(elapsed() * 100d) / 100d; 
+		double rounded = Math.round(elapsedMillis() * 100d) / 100d;
 		return String.valueOf(rounded).concat(" ms");
 	}
 }
