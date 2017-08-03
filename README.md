@@ -11,7 +11,7 @@ The stopwatch can measure execution time for a single interval, or across multip
 intervals, the calculated elapsed time value is *cumulative* unless you ```restart()``` the timer for your next interval. 
 
 You can query the stopwatch whether it is running or after it has halted. If the stopwatch is running, the elapsed time value will 
-steadily increase each time the stopwatch is queried. This means that calling ```stop()``` is effectively optional; it will only freeze 
+steadily increase each time the stopwatch is queried. This effectively means that calling ```stop()``` is optional; it will only freeze 
 the timer and retains the last recorded elapsed time elapsed time value. In other words, when the timer is stopped, querying the stopwatch 
 will return the elapsed time value as of the last call to ```stop()```, whenever it was. Elapsed time is calculated in either milliseconds 
 or seconds.
