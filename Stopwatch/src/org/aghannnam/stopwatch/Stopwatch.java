@@ -26,7 +26,7 @@ public class Stopwatch {
 	private boolean running;
 
 	/**
-	 * The total elapsed time, in nanoseconds.  
+	 * The total elapsed time, in nanoseconds (raw value).  
 	 */
 	private long elapsed;
 
