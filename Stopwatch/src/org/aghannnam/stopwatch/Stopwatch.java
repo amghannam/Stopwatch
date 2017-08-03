@@ -4,7 +4,7 @@
 package org.aghannnam.stopwatch;
 
 /**
- * This class implements a simple stopwatch utility intended for accurate
+ * This class implements a simple stopwatch utility intended for precise
  * measurement of code execution time.
  * 
  * @author Ahmed Ghannam
