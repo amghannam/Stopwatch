@@ -13,7 +13,7 @@ intervals, the calculated elapsed time value is *cumulative* unless you ```resta
 You can query the stopwatch whether it is running or after it has halted. If the stopwatch is running, the elapsed time value will 
 steadily increase each time the stopwatch is queried. This effectively means that calling ```stop()``` is optional; it will only freeze 
 the timer and retains the last recorded elapsed time value. In other words, if the timer is idle, querying the stopwatch 
-will return the elapsed time value as of the last call to ```stop()```, whenever it was. Elapsed time is calculated in either milliseconds or seconds, as desired. Of course these values can also be converted to other units at your discretion. 
+will return the elapsed time value as of the last call to ```stop()```, whenever it was. Elapsed time is calculated in either milliseconds or seconds, as desired. These values can also be converted to other units at your discretion. 
 
 Finally, as the stopwatch uses Java's ```System.nanoTime()``` as its backbone, it is *not* thread-safe. 
 
