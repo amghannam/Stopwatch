@@ -129,7 +129,7 @@ public class Stopwatch {
 	 *         <code>false</code> otherwise
 	 */
 	public boolean isRunning() {
-		return running == true;
+		return running;
 	}
 
 	/**
