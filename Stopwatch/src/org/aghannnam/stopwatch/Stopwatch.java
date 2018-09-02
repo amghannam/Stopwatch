@@ -43,15 +43,6 @@ public class Stopwatch {
 	}
 
 	/**
-	 * Stops time interval measurement and resets the elapsed time to zero.
-	 */
-	public void reset() {
-		elapsed = 0;
-		running = false;
-		start = 0;
-	}
-
-	/**
 	 * Stops time interval measurement, resets the elapsed time to zero, and starts
 	 * measuring elapsed time again.
 	 * 
@@ -61,6 +52,15 @@ public class Stopwatch {
 	public void restart() {
 		reset();
 		start();
+	}
+	
+	/**
+	 * Stops time interval measurement and resets the elapsed time to zero.
+	 */
+	public void reset() {
+		elapsed = 0;
+		running = false;
+		start = 0;
 	}
 
 	/**
