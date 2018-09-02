@@ -26,18 +26,17 @@ public class Stopwatch {
 	private boolean running;
 
 	/**
-	 * The total elapsed time, in nanoseconds (raw value).  
+	 * The total elapsed time, in nanoseconds (raw value).
 	 */
 	private long elapsed;
 
 	/**
-	 * The start timestamp, as determined by a call to
-	 * <code>System.nanoTime()</code>.
+	 * The start timestamp, as determined by a call to {@code System.nanoTime()}.
 	 */
 	private long start;
 
 	/**
-	 * Constructs a new <code>Stopwatch</code> instance.
+	 * Constructs a new {@code Stopwatch} instance.
 	 */
 	public Stopwatch() {
 		reset();
@@ -53,8 +52,8 @@ public class Stopwatch {
 	}
 
 	/**
-	 * Stops time interval measurement, resets the elapsed time to zero, and
-	 * starts measuring elapsed time again.
+	 * Stops time interval measurement, resets the elapsed time to zero, and starts
+	 * measuring elapsed time again.
 	 */
 	public void restart() {
 		reset();
@@ -73,13 +72,13 @@ public class Stopwatch {
 	}
 
 	/**
-	 * Initializes a new <code>Stopwatch</code> instance, sets the elapsed time
-	 * to zero, and starts measuring elapsed time.
+	 * Initializes a new {@code Stopwatch} instance, sets the elapsed time to zero,
+	 * and starts measuring elapsed time.
 	 * 
-	 * @return a new <code>Stopwatch</code> instance
+	 * @return a new {@code Stopwatch} instance
 	 */
 	public static Stopwatch startNew() {
-		Stopwatch s = new Stopwatch();
+		var s = new Stopwatch();
 		s.start();
 		return s;
 	}
@@ -94,10 +93,10 @@ public class Stopwatch {
 			running = false;
 		}
 	}
-	
+
 	/**
-	 * Returns the total elapsed time measured so far by the current instance,
-	 * in seconds.
+	 * Returns the total elapsed time measured so far by the current instance, in
+	 * seconds.
 	 * 
 	 * @return the total elapsed time in seconds
 	 */
@@ -106,8 +105,8 @@ public class Stopwatch {
 	}
 
 	/**
-	 * Returns the total elapsed time measured so far by the current instance,
-	 * in milliseconds.
+	 * Returns the total elapsed time measured so far by the current instance, in
+	 * milliseconds.
 	 * 
 	 * @return the total elapsed time in milliseconds
 	 */
@@ -122,11 +121,9 @@ public class Stopwatch {
 	}
 
 	/**
-	 * Returns <code>true</code> if the current <code>Stopwatch</code> instance
-	 * is running.
+	 * Returns {@code true} if the current {@code Stopwatch} instance is running.
 	 * 
-	 * @return <code>true</code> if the stopwatch is running, or
-	 *         <code>false</code> otherwise
+	 * @return {@code true} if the stopwatch is running, or {@code false} otherwise
 	 */
 	public boolean isRunning() {
 		return running;
@@ -137,8 +134,7 @@ public class Stopwatch {
 	 * milliseconds using two decimal places.
 	 * 
 	 * <p>
-	 * Example: 1.2345 would return a string value equal to 
-	 * <code>"1.23 ms"</code>.
+	 * Example: 1.2345 would return a string value equal to {@code "1.23 ms"}.
 	 * </p>
 	 * 
 	 * @return a string representation of the elapsed time in milliseconds
