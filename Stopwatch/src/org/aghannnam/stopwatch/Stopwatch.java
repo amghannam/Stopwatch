@@ -6,7 +6,7 @@ package org.aghannnam.stopwatch;
 /**
  * This class implements a simple stopwatch utility intended for precise
  * measurement of code execution time.
- * 
+ *
  * @author Ahmed Ghannam
  */
 public class Stopwatch {
@@ -54,6 +54,9 @@ public class Stopwatch {
 	/**
 	 * Stops time interval measurement, resets the elapsed time to zero, and starts
 	 * measuring elapsed time again.
+	 * 
+	 * <p>This is a convenience method equivalent to calling {@code reset()} 
+	 * followed by {@code start()}.</p>
 	 */
 	public void restart() {
 		reset();
@@ -75,10 +78,10 @@ public class Stopwatch {
 	 * Initializes a new {@code Stopwatch} instance, sets the elapsed time to zero,
 	 * and starts measuring elapsed time.
 	 * 
-	 * @return a new {@code Stopwatch} instance
+	 * @return a new {@code Stopwatch} instance 
 	 */
 	public static Stopwatch startNew() {
-		var s = new Stopwatch();
+		final var s = new Stopwatch();
 		s.start();
 		return s;
 	}
@@ -97,7 +100,7 @@ public class Stopwatch {
 	/**
 	 * Returns the total elapsed time measured so far by the current instance, in
 	 * seconds.
-	 * 
+	 *
 	 * @return the total elapsed time in seconds
 	 */
 	public double elapsedSeconds() {
@@ -107,22 +110,19 @@ public class Stopwatch {
 	/**
 	 * Returns the total elapsed time measured so far by the current instance, in
 	 * milliseconds.
-	 * 
+	 *
 	 * @return the total elapsed time in milliseconds
 	 */
 	public double elapsedMillis() {
-		// If the stopwatch is running, find and return the current timestamp
-		if (isRunning()) {
-			long currentElapsed = System.nanoTime() - start;
-			return currentElapsed / NANOS_PER_MILLI;
-		}
-		// Otherwise, just return the timestamp as of the last call to stop()
-		return elapsed / NANOS_PER_MILLI;
+		// If the stopwatch is running, compute and return the current timestamp.
+		// Otherwise, just return the timestamp as of the last call to stop().
+		return isRunning() ? (System.nanoTime() - start) / NANOS_PER_MILLI
+				: elapsed / NANOS_PER_MILLI;
 	}
 
 	/**
 	 * Returns {@code true} if the current {@code Stopwatch} instance is running.
-	 * 
+	 *
 	 * @return {@code true} if the stopwatch is running, or {@code false} otherwise
 	 */
 	public boolean isRunning() {
@@ -132,16 +132,15 @@ public class Stopwatch {
 	/**
 	 * Returns a string representation of the current elapsed time, expressed in
 	 * milliseconds using two decimal places.
-	 * 
-	 * <p>
-	 * Example: 1.2345 would return a string value equal to {@code "1.23 ms"}.
+	 *
+	 * <p>Example: 1.2345 would return a string value equal to {@code "1.23 ms"}.
 	 * </p>
-	 * 
+	 *
 	 * @return a string representation of the elapsed time in milliseconds
 	 */
 	@Override
 	public String toString() {
-		double rounded = Math.round(elapsedMillis() * 100d) / 100d;
+		final double rounded = Math.round(elapsedMillis() * 100d) / 100d;
 		return String.valueOf(rounded).concat(" ms");
 	}
 }
