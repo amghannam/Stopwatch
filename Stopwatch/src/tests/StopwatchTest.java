@@ -5,6 +5,8 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.concurrent.TimeUnit;
+
 import org.aghannnam.stopwatch.Stopwatch;
 
 import org.junit.Before;
@@ -77,14 +79,14 @@ public class StopwatchTest {
 	public void testElapsedSeconds() throws InterruptedException {
 		s.restart();
 		Thread.sleep(1000);
-		assertTrue(s.elapsedSeconds() >= 1);
+		assertTrue(s.elapsed(TimeUnit.SECONDS) >= 1);
 		Thread.sleep(1000);
-		assertTrue(s.elapsedSeconds() >= 2);
+		assertTrue(s.elapsed(TimeUnit.SECONDS) >= 2);
 		s.stop();
-		assertTrue(s.elapsedSeconds() >= 2);
+		assertTrue(s.elapsed(TimeUnit.SECONDS) >= 2);
 		
 		s.restart();
-		assertFalse(s.elapsedSeconds() >= 2); 
+		assertFalse(s.elapsed(TimeUnit.SECONDS) >= 2); 
 	}
 
 	/**
@@ -94,13 +96,13 @@ public class StopwatchTest {
 	public void testElapsedMillis() throws InterruptedException {
 		s.restart();
 		Thread.sleep(1000);
-		assertTrue(s.elapsedMillis() >= 999);
+		assertTrue(s.elapsed(TimeUnit.MILLISECONDS) >= 999);
 		Thread.sleep(1000);
-		assertTrue(s.elapsedMillis() >= 1999); 
+		assertTrue(s.elapsed(TimeUnit.MILLISECONDS) >= 1999); 
 		s.stop();
-		assertTrue(s.elapsedMillis() >= 1999);
+		assertTrue(s.elapsed(TimeUnit.MILLISECONDS) >= 1999);
 		
 		s.restart();
-		assertFalse(s.elapsedMillis() >= 1999); 
+		assertFalse(s.elapsed(TimeUnit.MILLISECONDS) >= 1999); 
 	}
 }
