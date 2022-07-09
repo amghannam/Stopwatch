@@ -7,8 +7,7 @@ import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
 
-import org.aghannnam.stopwatch.Stopwatch;
-
+import org.aghannam.stopwatch.Stopwatch;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +26,7 @@ public class StopwatchTest {
 	}
 	
 	/**
-	 * Test method for {@link org.aghannnam.stopwatch.Stopwatch#reset()}.
+	 * Test method for {@link org.aghannam.stopwatch.Stopwatch#reset()}.
 	 */
 	@Test
 	public void testReset() {
@@ -36,7 +35,7 @@ public class StopwatchTest {
 	}
 
 	/**
-	 * Test method for {@link org.aghannnam.stopwatch.Stopwatch#start()}.
+	 * Test method for {@link org.aghannam.stopwatch.Stopwatch#start()}.
 	 */
 	@Test
 	public void testStart() {
@@ -45,7 +44,7 @@ public class StopwatchTest {
 	}
 
 	/**
-	 * Test method for {@link org.aghannnam.stopwatch.Stopwatch#restart()}.
+	 * Test method for {@link org.aghannam.stopwatch.Stopwatch#restart()}.
 	 */
 	@Test
 	public void testRestart() {
@@ -54,7 +53,7 @@ public class StopwatchTest {
 	}
 
 	/**
-	 * Test method for {@link org.aghannnam.stopwatch.Stopwatch#startNew()}.
+	 * Test method for {@link org.aghannam.stopwatch.Stopwatch#startNew()}.
 	 */
 	@Test
 	public void testStartNew() {
@@ -63,7 +62,7 @@ public class StopwatchTest {
 	}
 
 	/**
-	 * Test method for {@link org.aghannnam.stopwatch.Stopwatch#stop()}.
+	 * Test method for {@link org.aghannam.stopwatch.Stopwatch#stop()}.
 	 */
 	@Test
 	public void testStop() {
@@ -72,7 +71,7 @@ public class StopwatchTest {
 	}
 
 	/**
-	 * Test method for {@link org.aghannnam.stopwatch.Stopwatch#elapsedSeconds()}.
+	 * Test method for {@link org.aghannam.stopwatch.Stopwatch#elapsedSeconds()}.
 	 * @throws InterruptedException 
 	 */
 	@Test
@@ -90,7 +89,7 @@ public class StopwatchTest {
 	}
 
 	/**
-	 * Test method for {@link org.aghannnam.stopwatch.Stopwatch#elapsedMillis()}.
+	 * Test method for {@link org.aghannam.stopwatch.Stopwatch#elapsedMillis()}.
 	 */
 	@Test
 	public void testElapsedMillis() throws InterruptedException {

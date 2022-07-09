@@ -1,7 +1,7 @@
 /*
  * File: Stopwatch.java
  */
-package org.aghannnam.stopwatch;
+package org.aghannam.stopwatch;
 
 import java.util.concurrent.TimeUnit;
 
