@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * <pre>{@code
  * Stopwatch sw = Stopwatch.startNew();
  * doWork();
- * sw.stop();
+ * sw.stop(); // optional call
  * System.out.println(sw); // e.g. "1.234 ms"
  * System.out.println(sw.elapsed(TimeUnit.MILLISECONDS)); // 1.234
  * }</pre>
@@ -123,6 +123,11 @@ public final class Stopwatch implements AutoCloseable {
 	 * The accumulated elapsed time is preserved and can be resumed by calling
 	 * {@link #start()} again. Calling {@code stop()} on a stopwatch that is already
 	 * stopped is a no-op.
+	 * 
+	 * @apiNote Calling this method is optional for retrieving elapsed time; elapsed
+	 *          values can be queried while the stopwatch is running. However,
+	 *          {@code stop()} freezes the current value and prevents further
+	 *          accumulation until restarted.
 	 */
 	public synchronized void stop() {
 		if (running) {
@@ -180,8 +185,8 @@ public final class Stopwatch implements AutoCloseable {
 	 * Returns the total elapsed time measured so far, in nanoseconds.
 	 *
 	 * <p>
-	 * If the stopwatch is running the value is computed live; if it is stopped the
-	 * value recorded at the last {@link #stop()} call is returned.
+	 * If the stopwatch is running, the value is computed live; if it is stopped,
+	 * the value recorded at the last {@link #stop()} call is returned.
 	 *
 	 * @return elapsed nanoseconds (never negative)
 	 */
