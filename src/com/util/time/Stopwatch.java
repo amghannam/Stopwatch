@@ -334,7 +334,7 @@ public final class Stopwatch implements AutoCloseable {
 			Objects.requireNonNull(sw, "sw");
 
 			long nanos = sw.elapsedNanos();
-			TimeUnit unit = chooseUnit(nanos);
+			var unit = chooseUnit(nanos);
 			double value = (double) nanos / unit.toNanos(1L);
 
 			// Locale.ROOT ensures '.' as the decimal separator in all locales.

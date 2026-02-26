@@ -25,5 +25,13 @@ public class StopwatchDemo {
 		System.out.println("Millis (double): " + sw.elapsed(TimeUnit.MILLISECONDS));
 		System.out.println("Millis (floor): " + sw.elapsed(TimeUnit.MILLISECONDS, Stopwatch.Rounding.FLOOR));
 		System.out.println("Nanos: " + sw.elapsedNanos());
+		
+		System.out.println("Restarting...");
+		sw.restart();
+		Thread.sleep(10000); // 10 seconds 
+		
+		sw.stop();
+		
+		System.out.println("Seconds (double): " + Stopwatch.Formatter.format(sw));
 	}
 }
