@@ -1,4 +1,4 @@
-package com.utils.test.stopwatch;
+package com.util.test.stopwatch;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

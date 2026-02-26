@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * A stopwatch can be started, stopped, and restarted any number of times.
  * Elapsed time accumulates across start/stop cycles until {@link #reset()} is
  * called. The stopwatch is <em>not</em> automatically reset on
- * {@link #start()}; use {@link #restart()} for that behaviour.
+ * {@link #start()}; use {@link #restart()} for that behavior.
  *
  * <h2>Basic usage</h2>
  * 
@@ -83,14 +83,14 @@ public final class Stopwatch implements AutoCloseable {
 	 * Creates a new {@code Stopwatch} and immediately starts it.
 	 *
 	 * <p>
-	 * Equivalent to:
+	 * This is a convenience method equivalent to:
 	 * 
 	 * <pre>{@code
 	 * Stopwatch sw = new Stopwatch();
 	 * sw.start();
 	 * }</pre>
 	 *
-	 * @return a new, running {@code Stopwatch}
+	 * @return a new, running {@code Stopwatch} instance
 	 */
 	public static Stopwatch startNew() {
 		final var sw = new Stopwatch();
@@ -103,7 +103,7 @@ public final class Stopwatch implements AutoCloseable {
 	// -------------------------------------------------------------------------
 
 	/**
-	 * Starts, or resumes, measuring elapsed time.
+	 * Starts, or resumes, measuring elapsed time for the current instance.
 	 *
 	 * <p>
 	 * Calling {@code start()} on a stopwatch that is already running is a no-op;
@@ -117,7 +117,7 @@ public final class Stopwatch implements AutoCloseable {
 	}
 
 	/**
-	 * Stops measuring elapsed time.
+	 * Stops measuring elapsed time for the current instance.
 	 *
 	 * <p>
 	 * The accumulated elapsed time is preserved and can be resumed by calling
@@ -146,12 +146,6 @@ public final class Stopwatch implements AutoCloseable {
 
 	/**
 	 * Resets the elapsed time to zero and immediately starts measuring again.
-	 *
-	 * <p>
-	 * Implemented by directly stamping the three state fields rather than
-	 * delegating to {@link #reset()} and {@link #start()}, which would call
-	 * {@link System#nanoTime()} twice and traverse two method calls unnecessarily.
-	 * The semantics are atomically: zero, then run from now.
 	 */
 	public synchronized void restart() {
 		elapsedNanos = 0L;
