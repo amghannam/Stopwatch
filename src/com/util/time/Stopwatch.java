@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A high-resolution elapsed-time stopwatch backed by {@link System#nanoTime()}.
+ * A high-resolution stopwatch utility backed by {@link System#nanoTime()}.
  *
  * <p>
  * A stopwatch can be started, stopped, and restarted any number of times.
@@ -62,12 +62,7 @@ public final class Stopwatch implements AutoCloseable {
 	private boolean running;
 
 	/**
-	 * Constructs a new, idle {@code Stopwatch} instance with zero elapsed time.
-	 *
-	 * <p>
-	 * Fields are initialized directly rather than via {@link #reset()} — the object
-	 * has not been published yet so there are no synchronization concerns, and
-	 * direct initialization keeps construction self-contained.
+	 * Constructs a new, idle {@code Stopwatch} instance.
 	 */
 	public Stopwatch() {
 		running = false;
@@ -140,8 +135,8 @@ public final class Stopwatch implements AutoCloseable {
 	 * Resets the elapsed time to zero and stops the stopwatch.
 	 *
 	 * <p>
-	 * After this call, {@link #isRunning()} returns {@code false} and
-	 * {@link #elapsedNanos()} returns {@code 0}.
+	 * Invoking this method puts the stopwatch in the same state as a newly
+	 * constructed instance.
 	 */
 	public synchronized void reset() {
 		running = false;
@@ -151,6 +146,11 @@ public final class Stopwatch implements AutoCloseable {
 
 	/**
 	 * Resets the elapsed time to zero and immediately starts measuring again.
+	 *
+	 * <p>
+	 * If the stopwatch is not running, this method produces the same state as
+	 * invoking {@link #start()} on a newly constructed stopwatch, discarding any
+	 * previously recorded elapsed time.
 	 */
 	public synchronized void restart() {
 		elapsedNanos = 0L;
