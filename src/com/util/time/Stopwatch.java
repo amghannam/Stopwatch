@@ -204,8 +204,8 @@ public final class Stopwatch implements AutoCloseable {
 	}
 
 	/**
-	 * Returns the elapsed time in the given {@link TimeUnit} as a {@code double},
-	 * preserving fractional units.
+	 * Returns the elapsed time in the given {@link TimeUnit} as a {@code double}
+	 * value, preserving fractional units.
 	 *
 	 * <p>
 	 * For integer results with explicit rounding, use
@@ -221,8 +221,8 @@ public final class Stopwatch implements AutoCloseable {
 	}
 
 	/**
-	 * Returns the elapsed time in the given {@link TimeUnit} as a {@code long},
-	 * using the specified {@link Rounding} mode to handle fractional units.
+	 * Returns the elapsed time in the given {@link TimeUnit} as a {@code long}
+	 * value, using the specified {@link Rounding} mode to handle fractional units.
 	 *
 	 * @param unit     the desired unit of time (non-null)
 	 * @param rounding the rounding strategy to apply (non-null)
