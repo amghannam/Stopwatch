@@ -2,6 +2,10 @@
 
 A high-resolution elapsed-time utility for Java, backed by `System.nanoTime()`.
 
+## Requirements
+
+Java 21 or later.
+
 ## Overview
 
 `Stopwatch` measures code execution time across one or more intervals. An *interval* is a
@@ -86,6 +90,7 @@ coarsest readable unit automatically and formats to four significant figures:
 | 5,000,000,000 ns | `5.000 s` |
 | 120,000,000,000 ns | `2.000 min` |
 | 7,200,000,000,000 ns | `2.000 h` |
+| 172,800,000,000,000 ns | `2.000 d` |
 
 The decimal separator is always `.` regardless of the JVM's default locale.
 

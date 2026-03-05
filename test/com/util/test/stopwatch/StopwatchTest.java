@@ -451,6 +451,12 @@ class StopwatchTest {
 		}
 
 		@Test
+		@DisplayName("formats day-range duration using d suffix")
+		void formatsDays() {
+			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(86_400_000_000_000L)).endsWith("d"));
+		}
+
+		@Test
 		@DisplayName("uses '.' as decimal separator regardless of locale")
 		void usesRootLocaleDecimalSeparator() {
 			// 1.5 ms should format as "1.500 ms", never "1,500 ms"

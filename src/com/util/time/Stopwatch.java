@@ -188,7 +188,8 @@ public final class Stopwatch implements AutoCloseable {
 	 * If the stopwatch is running, the value is computed live; if it is stopped,
 	 * the value recorded at the last {@link #stop()} call is returned.
 	 *
-	 * @return elapsed nanoseconds (never negative)
+	 * @return the elapsed time in nanoseconds (guaranteed non-negative under normal
+	 *         operating conditions)
 	 */
 	public synchronized long elapsedNanos() {
 		return running ? (System.nanoTime() - startNanos) : elapsedNanos;
@@ -197,7 +198,7 @@ public final class Stopwatch implements AutoCloseable {
 	/**
 	 * Returns the elapsed time as a {@link Duration}.
 	 *
-	 * @return elapsed duration
+	 * @return the elapsed duration
 	 */
 	public Duration elapsedDuration() {
 		return Duration.ofNanos(elapsedNanos());
@@ -212,7 +213,7 @@ public final class Stopwatch implements AutoCloseable {
 	 * {@link #elapsed(TimeUnit, Rounding)}.
 	 *
 	 * @param unit the desired unit of time (non-null)
-	 * @return elapsed time in the specified unit
+	 * @return the elapsed time in the specified unit
 	 * @throws NullPointerException if {@code unit} is null
 	 */
 	public double elapsed(TimeUnit unit) {
@@ -226,7 +227,7 @@ public final class Stopwatch implements AutoCloseable {
 	 *
 	 * @param unit     the desired unit of time (non-null)
 	 * @param rounding the rounding strategy to apply (non-null)
-	 * @return elapsed time, rounded according to {@code rounding}
+	 * @return the elapsed time, rounded according to {@code rounding}
 	 * @throws NullPointerException if either argument is null
 	 */
 	public long elapsed(TimeUnit unit, Rounding rounding) {
@@ -274,7 +275,7 @@ public final class Stopwatch implements AutoCloseable {
 	 * The unit is chosen automatically to produce a compact, readable value (e.g.
 	 * {@code "1.234 ms"}, {@code "3.500 s"}, {@code "72.00 min"}).
 	 *
-	 * @return formatted elapsed-time string
+	 * @return a formatted elapsed-time string
 	 */
 	@Override
 	public String toString() {
@@ -324,7 +325,7 @@ public final class Stopwatch implements AutoCloseable {
 
 		/**
 		 * Formats the elapsed time of {@code sw} using an automatically chosen unit
-		 * from the ladder: ns → μs → ms → s → min → h.
+		 * from the ladder: ns → μs → ms → s → min → h → d.
 		 *
 		 * <p>
 		 * The coarsest unit for which the elapsed value is ≥ 1 is selected (i.e. the
@@ -356,6 +357,8 @@ public final class Stopwatch implements AutoCloseable {
 		 * @return the most readable {@link TimeUnit} for this duration
 		 */
 		private static TimeUnit chooseUnit(long nanos) {
+			if (TimeUnit.NANOSECONDS.toDays(nanos) > 0)
+				return TimeUnit.DAYS;
 			if (TimeUnit.NANOSECONDS.toHours(nanos) > 0)
 				return TimeUnit.HOURS;
 			if (TimeUnit.NANOSECONDS.toMinutes(nanos) > 0)
@@ -380,12 +383,13 @@ public final class Stopwatch implements AutoCloseable {
 		 */
 		private static String abbreviate(TimeUnit unit) {
 			return switch (unit) {
-			case HOURS -> "h";
-			case MINUTES -> "min";
-			case SECONDS -> "s";
-			case MILLISECONDS -> "ms";
-			case MICROSECONDS -> "μs";
-			case NANOSECONDS -> "ns";
+			case TimeUnit.DAYS -> "d";
+			case TimeUnit.HOURS -> "h";
+			case TimeUnit.MINUTES -> "min";
+			case TimeUnit.SECONDS -> "s";
+			case TimeUnit.MILLISECONDS -> "ms";
+			case TimeUnit.MICROSECONDS -> "μs";
+			case TimeUnit.NANOSECONDS -> "ns";
 			default -> throw new AssertionError("Unexpected unit: " + unit);
 			};
 		}
