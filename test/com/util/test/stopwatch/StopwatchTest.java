@@ -427,37 +427,37 @@ class StopwatchTest {
 		@Test
 		@DisplayName("formats microsecond-range duration using μs suffix")
 		void formatsMicroseconds() {
-			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(5_000L)).endsWith("μs"));
+			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(TimeUnit.MICROSECONDS.toNanos(5))).endsWith("μs"));
 		}
 
 		@Test
 		@DisplayName("formats millisecond-range duration using ms suffix")
 		void formatsMilliseconds() {
-			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(5_000_000L)).endsWith("ms"));
+			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(TimeUnit.MILLISECONDS.toNanos(5))).endsWith("ms"));
 		}
 
 		@Test
 		@DisplayName("formats second-range duration using s suffix")
 		void formatsSeconds() {
-			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(5_000_000_000L)).endsWith("s"));
+			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(TimeUnit.SECONDS.toNanos(5))).endsWith("s"));
 		}
 
 		@Test
 		@DisplayName("formats minute-range duration using min suffix")
 		void formatsMinutes() {
-			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(120_000_000_000L)).endsWith("min"));
+			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(TimeUnit.MINUTES.toNanos(2))).endsWith("min"));
 		}
 
 		@Test
 		@DisplayName("formats hour-range duration using h suffix")
 		void formatsHours() {
-			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(7_200_000_000_000L)).endsWith("h"));
+			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(TimeUnit.HOURS.toNanos(2))).endsWith("h"));
 		}
 
 		@Test
 		@DisplayName("formats day-range duration using d suffix")
 		void formatsDays() {
-			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(86_400_000_000_000L)).endsWith("d"));
+			assertTrue(Stopwatch.Formatter.format(stopwatchWithNanos(TimeUnit.DAYS.toNanos(1))).endsWith("d"));
 		}
 
 		@Test
