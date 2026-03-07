@@ -78,7 +78,7 @@ public final class Stopwatch implements AutoCloseable {
 	 * Creates a new {@code Stopwatch} and immediately starts it.
 	 *
 	 * <p>
-	 * This is a convenience method equivalent to:
+	 * This is a convenience factory method equivalent to:
 	 * 
 	 * <pre>{@code
 	 * Stopwatch sw = new Stopwatch();
@@ -108,26 +108,6 @@ public final class Stopwatch implements AutoCloseable {
 		if (!running) {
 			startNanos = System.nanoTime() - elapsedNanos;
 			running = true;
-		}
-	}
-
-	/**
-	 * Stops measuring elapsed time for the current instance.
-	 *
-	 * <p>
-	 * The accumulated elapsed time is preserved and can be resumed by calling
-	 * {@link #start()} again. Calling {@code stop()} on a stopwatch that is already
-	 * stopped is a no-op.
-	 * 
-	 * @apiNote Calling this method is optional for retrieving elapsed time; elapsed
-	 *          values can be queried while the stopwatch is running. However,
-	 *          {@code stop()} freezes the current value and prevents further
-	 *          accumulation until restarted.
-	 */
-	public synchronized void stop() {
-		if (running) {
-			elapsedNanos = System.nanoTime() - startNanos;
-			running = false;
 		}
 	}
 
@@ -177,32 +157,29 @@ public final class Stopwatch implements AutoCloseable {
 		stop();
 	}
 
+	/**
+	 * Stops measuring elapsed time for the current instance.
+	 *
+	 * <p>
+	 * The accumulated elapsed time is preserved and can be resumed by calling
+	 * {@link #start()} again. Calling {@code stop()} on a stopwatch that is already
+	 * stopped is a no-op.
+	 * 
+	 * @apiNote Calling this method is <em>optional</em> for retrieving elapsed
+	 *          time; elapsed values can be queried while the stopwatch is running.
+	 *          However, {@code stop()} freezes the current value and prevents
+	 *          further accumulation until restarted.
+	 */
+	public synchronized void stop() {
+		if (running) {
+			elapsedNanos = System.nanoTime() - startNanos;
+			running = false;
+		}
+	}
+
 	// -------------------------------------------------------------------------
 	// Elapsed-time queries
 	// -------------------------------------------------------------------------
-
-	/**
-	 * Returns the total elapsed time measured so far, in nanoseconds.
-	 *
-	 * <p>
-	 * If the stopwatch is running, the value is computed live; if it is stopped,
-	 * the value recorded at the last {@link #stop()} call is returned.
-	 *
-	 * @return the elapsed time in nanoseconds (guaranteed non-negative under normal
-	 *         operating conditions)
-	 */
-	public synchronized long elapsedNanos() {
-		return running ? (System.nanoTime() - startNanos) : elapsedNanos;
-	}
-
-	/**
-	 * Returns the elapsed time as a {@link Duration}.
-	 *
-	 * @return the elapsed duration
-	 */
-	public Duration elapsedDuration() {
-		return Duration.ofNanos(elapsedNanos());
-	}
 
 	/**
 	 * Returns the elapsed time in the given {@link TimeUnit} as a {@code double}
@@ -238,16 +215,39 @@ public final class Stopwatch implements AutoCloseable {
 		long unitNanos = unit.toNanos(1L);
 
 		return switch (rounding) {
-		case FLOOR -> nanos / unitNanos;
-		case CEILING -> (nanos + unitNanos - 1L) / unitNanos;
+		case Rounding.FLOOR -> nanos / unitNanos;
+		case Rounding.CEILING -> (nanos + unitNanos - 1L) / unitNanos;
 		// Addition-based rounding (nanos + unitNanos/2) can overflow for
 		// extreme durations. The modulo form is equivalent and overflow-safe.
-		case NEAREST -> {
+		case Rounding.NEAREST -> {
 			long q = nanos / unitNanos;
 			long r = nanos % unitNanos;
 			yield (r >= unitNanos / 2L) ? q + 1L : q;
 		}
 		};
+	}
+
+	/**
+	 * Returns the elapsed time as a {@link Duration}.
+	 *
+	 * @return the elapsed duration
+	 */
+	public Duration elapsedDuration() {
+		return Duration.ofNanos(elapsedNanos());
+	}
+
+	/**
+	 * Returns the total elapsed time measured so far, in nanoseconds.
+	 *
+	 * <p>
+	 * If the stopwatch is running, the value is computed live; if it is stopped,
+	 * the value recorded at the last {@link #stop()} call is returned.
+	 *
+	 * @return the elapsed time in nanoseconds (guaranteed non-negative under normal
+	 *         operating conditions)
+	 */
+	public synchronized long elapsedNanos() {
+		return running ? (System.nanoTime() - startNanos) : elapsedNanos;
 	}
 
 	// -------------------------------------------------------------------------
@@ -291,11 +291,19 @@ public final class Stopwatch implements AutoCloseable {
 	 * converting a nanosecond count to a coarser {@link TimeUnit}.
 	 */
 	public enum Rounding {
-		/** Round towards zero (truncate). */
+		/**
+		 * Round towards zero (truncate).
+		 */
 		FLOOR,
-		/** Round away from zero (always round up). */
+
+		/**
+		 * Round away from zero (always round up).
+		 */
 		CEILING,
-		/** Round to the nearest unit (half-up). */
+
+		/**
+		 * Round to the nearest unit (half-up).
+		 */
 		NEAREST
 	}
 
